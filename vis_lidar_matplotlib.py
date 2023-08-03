@@ -6,6 +6,8 @@ from matplotlib.animation import FuncAnimation
 # set up the plot
 fig = plt.figure()
 ax = fig.add_subplot(111, polar=True)
+ax.set_thetamin(0)
+ax.set_thetamax(180)
 
 # initialize an empty line plot for the polygon
 line, = ax.plot([], [], 'r-', alpha=0.5)  # Red line connecting the points
@@ -22,6 +24,7 @@ def update(data):
     dists, angles = zip(*data)  # Unzip the data
     dists = np.asarray(dists)
     angles = np.asarray(angles)
+    dists[dists > 1700] = 0
 
     x = angles
     y = dists
@@ -29,7 +32,7 @@ def update(data):
     # update the line plot with the polygon
     line.set_data(np.append(x, x[0]), np.append(y, y[0]))  # Close the polygon
 
-    ax.set_rlim(0, dists.mean() / 2)
+    ax.set_rlim(0, 1700)
 
     return line,
 
