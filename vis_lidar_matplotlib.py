@@ -34,8 +34,8 @@ def update(data):
     angles = np.arange(0.0, 180.0, 180 / 721)
     dists = data
     for i in range(min(len(dists), len(angles))):
-        line.set_data(np.append(line.get_xdata(), dists[i]),
-                      np.append(line.get_ydata(), angles[i]))
+        line.set_data(np.append(line.get_xdata(), np.sin(angles[i])*dists[i]),
+                      np.append(line.get_ydata(), np.cos(angles[i])*dists[i]))
 
     return line,
 
