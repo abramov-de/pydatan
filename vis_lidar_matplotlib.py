@@ -2,6 +2,7 @@ import struct
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from math import sin, cos
 
 fig = plt.figure()
 ax = fig.add_subplot(111, polar=True)
@@ -32,10 +33,13 @@ def init():
 
 def update(data):
     angles = np.arange(0.0, 180.0, 180 / 721)
+    angle = []
+    for i in range(720):
+        angle[i] = np.deg2rad(angles[i])
     dists = data
     for i in range(min(len(dists), len(angles))):
-        line.set_data(np.append(line.get_xdata(), np.sin(angles[i])*dists[i]),
-                      np.append(line.get_ydata(), np.cos(angles[i])*dists[i]))
+        line.set_data(np.append(line.get_xdata(), sin(angle[i])*dists[i]),
+                      np.append(line.get_ydata(), cos(angle[i])*dists[i]))
 
     return line,
 
