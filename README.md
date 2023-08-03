@@ -7,3 +7,6 @@
 
 ### PANDAS_PYPLOT.
 *Work with **pandas, pyplot, seaborn, sklearn**, dataset processing.*
+
+### cyberpunk_plot.
+*Just beautiful and unusual ways of drawing charts, nothing more* ;)
