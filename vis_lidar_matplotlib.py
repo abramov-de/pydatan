@@ -24,7 +24,10 @@ def update(data):
     dists, angles = zip(*data)  # Unzip the data
     dists = np.asarray(dists)
     angles = np.asarray(angles)
-    dists[dists > 1700] = 0
+    # dists[dists > 1700] = 0
+    for i in range(len(dists)):
+        if dists[i] > 1700:
+            dists[i] = dists[i - 1]
 
     x = angles
     y = dists
@@ -41,7 +44,7 @@ def update(data):
 def read_lidar_data():
     angles = np.linspace(0.0, np.pi, 721)
     while True:
-        with open('lidar3.raw', 'rb') as f:
+        with open('lidar.raw', 'rb') as f:
             buf = f.read(2 + 8 + 1 + 721 * 2 + 1 + 4 + 2)
             dists_time = struct.unpack_from('>721H', buf, 11)
             dists = np.asarray(dists_time)
