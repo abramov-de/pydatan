@@ -21,12 +21,14 @@ def init():
 
 # function to update the plot
 def update(data):
-    dists, angles = zip(*data)  # Unzip the data
-    dists = np.asarray(dists)
-    angles = np.asarray(angles)
-    # dists[dists > 1700] = 0
-    for i in range(len(dists)):
-        if dists[i] > 1700:
+    max_normal_val = 1700
+    # dists, angles = zip(*data)  # Unzip the data
+    dists, angles = data
+    # dists = np.asarray(dists)  # its array
+    # angles = np.asarray(angles)  # its array
+    # max_normal_val = 1700  # argument,  1200
+    for i in range(len(dists)):  # remove for
+        if dists[i] > max_normal_val:
             dists[i] = dists[i - 1]
 
     x = angles
@@ -44,11 +46,12 @@ def update(data):
 def read_lidar_data():
     angles = np.linspace(0.0, np.pi, 721)
     while True:
-        with open('lidar.raw', 'rb') as f:
+        with open('lidar2.raw', 'rb') as f:  # read all lidar files in loop
             buf = f.read(2 + 8 + 1 + 721 * 2 + 1 + 4 + 2)
             dists_time = struct.unpack_from('>721H', buf, 11)
             dists = np.asarray(dists_time)
-            yield list(zip(dists, angles))
+            # yield list(zip(dists, angles))  # remove zip, list
+            yield (dists, angles)
 
 
 # create the animation
