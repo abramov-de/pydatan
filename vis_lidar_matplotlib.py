@@ -21,21 +21,14 @@ def init():
 
 # function to update the plot
 def update(data):
-    max_normal_val = 1700
-    # dists, angles = zip(*data)  # Unzip the data
     dists, angles = data
-    # dists = np.asarray(dists)  # its array
-    # angles = np.asarray(angles)  # its array
-    # max_normal_val = 1700  # argument,  1200
+    max_normal_val = 1700  # argument,  1200
     for i in range(len(dists)):  # remove for
         if dists[i] > max_normal_val:
             dists[i] = dists[i - 1]
 
-    x = angles
-    y = dists
-
     # update the line plot with the polygon
-    line.set_data(np.append(x, x[0]), np.append(y, y[0]))  # Close the polygon
+    line.set_data(np.append(angles, angles[0]), np.append(dists, dists[0]))  # Close the polygon
 
     ax.set_rlim(0, 1700)
 
@@ -50,7 +43,6 @@ def read_lidar_data():
             buf = f.read(2 + 8 + 1 + 721 * 2 + 1 + 4 + 2)
             dists_time = struct.unpack_from('>721H', buf, 11)
             dists = np.asarray(dists_time)
-            # yield list(zip(dists, angles))  # remove zip, list
             yield (dists, angles)
 
 
