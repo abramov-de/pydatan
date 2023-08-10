@@ -1,6 +1,7 @@
 import struct
 import numpy as np
 import matplotlib.pyplot as plt
+import numpy.ma
 from matplotlib.animation import FuncAnimation
 
 # set up the plot
@@ -23,15 +24,24 @@ def init():
 def update(data):
     dists, angles = data
     max_normal_val = 1700  # argument,  1200
+
     # for i in range(len(dists)):  # remove for
     #     if dists[i] > max_normal_val:
     #         dists[i] = dists[i - 1]
-    np.minimum(max_normal_val, dists)
+    
+    # np.minimum(max_normal_val, dists)
+
+    # threshold_indices = dists > max_normal_val
+    # dists[threshold_indices] = np.min(dists)
+
+    # dists = numpy.ma.masked_where(dists > max_normal_val, dists)
+
+    dists = np.where(dists < 1700, dists, np.min(dists))
 
     # update the line plot with the polygon
     line.set_data(np.append(angles, angles[0]), np.append(dists, dists[0]))  # Close the polygon
 
-    ax.set_rlim(0, 1700)
+    ax.set_rlim(0, max_normal_val)
 
     return line,
 
