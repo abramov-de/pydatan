@@ -23,9 +23,10 @@ def init():
 def update(data):
     dists, angles = data
     max_normal_val = 1700  # argument,  1200
-    for i in range(len(dists)):  # remove for
-        if dists[i] > max_normal_val:
-            dists[i] = dists[i - 1]
+    # for i in range(len(dists)):  # remove for
+    #     if dists[i] > max_normal_val:
+    #         dists[i] = dists[i - 1]
+    np.minimum(max_normal_val, dists)
 
     # update the line plot with the polygon
     line.set_data(np.append(angles, angles[0]), np.append(dists, dists[0]))  # Close the polygon
