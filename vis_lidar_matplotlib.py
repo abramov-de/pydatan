@@ -1,8 +1,8 @@
 import struct
 import numpy as np
 import matplotlib.pyplot as plt
-import numpy.ma
 from matplotlib.animation import FuncAnimation
+import os
 
 # set up the plot
 fig = plt.figure()
@@ -23,18 +23,7 @@ def init():
 # function to update the plot
 def update(data):
     dists, angles = data
-    max_normal_val = 1700  # argument,  1200
-
-    # for i in range(len(dists)):  # remove for
-    #     if dists[i] > max_normal_val:
-    #         dists[i] = dists[i - 1]
-    
-    # np.minimum(max_normal_val, dists)
-
-    # threshold_indices = dists > max_normal_val
-    # dists[threshold_indices] = np.min(dists)
-
-    # dists = numpy.ma.masked_where(dists > max_normal_val, dists)
+    max_normal_val = 1700
 
     dists = np.where(dists < 1700, dists, np.min(dists))
 
@@ -49,12 +38,17 @@ def update(data):
 # function to read data from 'lidar.raw' in a loop
 def read_lidar_data():
     angles = np.linspace(0.0, np.pi, 721)
+
+    folderpath = r"C:\Users\Denis\OneDrive\Документы\lidar\raw_data"  # make sure to put the 'r' in front
+    filepaths = [os.path.join(folderpath, name) for name in os.listdir(folderpath)]
+
     while True:
-        with open('lidar2.raw', 'rb') as f:  # read all lidar files in loop
-            buf = f.read(2 + 8 + 1 + 721 * 2 + 1 + 4 + 2)
-            dists_time = struct.unpack_from('>721H', buf, 11)
-            dists = np.asarray(dists_time)
-            yield (dists, angles)
+        for path in filepaths:
+            with open(path, 'rb') as f:
+                buf = f.read(2 + 8 + 1 + 721 * 2 + 1 + 4 + 2)
+                dists_time = struct.unpack_from('>721H', buf, 11)
+                dists = np.asarray(dists_time)
+                yield (dists, angles)
 
 
 # create the animation
