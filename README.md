@@ -12,4 +12,4 @@
 *Just beautiful and unusual ways of drawing charts, nothing more* ;)
 
 ### KNN and K-Means.
-***<ins>K-nearest neighbors</ins>** and **<ins>K-means</ins>** algorithms - two machine learning models used to solve classification problems.*
+<ins>***K-nearest neighbors**</ins> and **<ins>K-means</ins>** algorithms - two machine learning models used to solve classification problems.*
