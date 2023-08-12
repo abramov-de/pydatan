@@ -10,3 +10,6 @@
 
 ### cyberpunk_plot.
 *Just beautiful and unusual ways of drawing charts, nothing more* ;)
+
+### KNN and K-Means.
+***K-nearest neighbors** and **K-means** algorithms - wo machine learning models used to solve classification problems.*
