@@ -6,7 +6,7 @@
 ***image2*** - *image processed in SOBEL_FILTER.*
 
 ### PANDAS_PYPLOT.
-*Work with **<ins>pandas</ins>, <ins>pyplot</ins>, <ins>seaborn</ins>, <ins>sklearn</ins>**, dataset processing.*
+*Work with <ins>**pandas</ins>, <ins>pyplot</ins>, <ins>seaborn</ins>, <ins>sklearn</ins>**, dataset processing.*
 
 ### cyberpunk_plot.
 *Just beautiful and unusual ways of drawing charts, nothing more* ;)
