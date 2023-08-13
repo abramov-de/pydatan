@@ -13,3 +13,6 @@
 
 ### KNN and K-Means.
 <ins>***K-nearest neighbors**</ins> and **<ins>K-means</ins>** algorithms - two machine learning models used to solve classification problems.*
+
+### Linear regression.
+*Study data on the popularity of songs on YouTube using <ins>linear regression</ins>.*
