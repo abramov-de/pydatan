@@ -24,13 +24,14 @@ def init():
 def update(data):
     dists, angles = data
     max_normal_val = 1700
+    axes_lim = max_normal_val + 200
 
-    dists = np.where(dists < 1700, dists, np.min(dists))
+    dists = np.minimum(dists, max_normal_val)
 
     # update the line plot with the polygon
     line.set_data(np.append(angles, angles[0]), np.append(dists, dists[0]))  # Close the polygon
 
-    ax.set_rlim(0, max_normal_val)
+    ax.set_rlim(0, axes_lim)
 
     return line,
 
